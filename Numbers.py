@@ -111,6 +111,7 @@ class MyIntegral:
         if isinstance(other, MyIntegral):
             return do_my_adding_stuff(other, self)
 
+
         elif isinstance(other, SpecialNumber):
             return do_my_other_adding_stuff(other, self)
 
