@@ -104,8 +104,13 @@ class MyIntegral:
             print("Adding MyIntegral and SpecialNumber")
             return do_my_other_adding_stuff(self, other)
 
+        elif isinstance(other, Integral):
+            print(" addr was kicked in Adding MyIntegral and Integral")
+            return int(other) + int(self)
+
         else:
             return NotImplemented
+
     def __radd__(self, other):
 
         if isinstance(other, MyIntegral):
@@ -116,6 +121,7 @@ class MyIntegral:
             return do_my_other_adding_stuff(other, self)
 
         elif isinstance(other, Integral):
+            print(" _raddr was kicked in Adding MyIntegral and Integral")
             return int(other) + int(self)
 
         elif isinstance(other, Real):
@@ -133,9 +139,12 @@ class Main():
     __name__ = "__main__"
     print(__name__)
 
-    printSetting(volume="high", brightness="medium", contrast="low")
+    # printSetting(volume="high", brightness="medium", contrast="low")
     p = MyIntegral(5)
     d = SpecialNumber(10)
-    print(p.__float__(),p.__complex__(), p.__add__(10), p.__add__(d))
+    k = 10
+    # print(p.__float__(),p.__complex__(), p.__add__(d), p.__add__(k))
+    print( p.__add__(10))
+    print( 10 + p)
 
 Main()
