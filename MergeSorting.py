@@ -65,10 +65,11 @@ def quick_sort(arr, low, high):
 def main():
     arr = 82744627829274869
     arr = [int(d) for d in str(arr)]
-    sample = range(-1,16)
-    print("sample",sample)
-    print("Before :", arr, len(arr), arr[-1])
-    quick_sort(arr, 0, len(arr) - 1)
-    print("After :", arr, len(arr))
+    # sample = range(-1,16)
+    # print("sample",sample)
+    # print("Before :", arr, len(arr), arr[-1])
+    # quick_sort(arr, 0, len(arr) - 1)
+    # print("After :", arr, len(arr))
+    print(0.1 + 0.2)
 
 main()
