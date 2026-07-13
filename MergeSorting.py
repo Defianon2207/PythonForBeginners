@@ -33,6 +33,8 @@ def partition(arr, low, high):
 
     # Index of the smaller element
     i = low - 1
+    print("array of low",arr[-1], high, range(low,high))
+    
 
     # Rearrange elements around the pivot
     for j in range(low, high):
@@ -60,14 +62,13 @@ def quick_sort(arr, low, high):
 
 
 
-
-
-
-
 def main():
     arr = 82744627829274869
     arr = [int(d) for d in str(arr)]
+    sample = range(-1,16)
+    print("sample",sample)
+    print("Before :", arr, len(arr), arr[-1])
     quick_sort(arr, 0, len(arr) - 1)
-    print("After :", arr)
+    print("After :", arr, len(arr))
 
 main()
