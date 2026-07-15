@@ -322,3 +322,43 @@ students = [
 students.sort(key=attrgetter("marks"))
 
 print(students)
+
+#Example of itenGetter
+numbers = [10, 20, 30, 40, 50]
+
+get_third = itemgetter(2)
+
+print(get_third(numbers))
+
+#FOr multiple items
+numbers = [10, 20, 30, 40, 50,60]
+getter = itemgetter(2, 5, 3)
+
+print(getter(numbers))
+
+#For tuple 
+t = (100, 200, 300, 400)
+
+getter = itemgetter(1)
+
+print(getter(t))
+
+
+#For Dictionaries
+student = {
+    "name": "Rahul",
+    "marks": 95,
+    "city": "Mumbai"
+}
+
+get_name = itemgetter("name")
+
+print(get_name(student))
+
+# Many operations have an “in-place” version. Listed below are functions providing a more primitive access to in-place
+#  operators than the usual syntax does; for example, the statement x += y is equivalent to x = operator.iadd(x, y). 
+# Another way to put it is to say that z = operator.iadd(x, y) is equivalent to the compound statement z = x; z += y.
+a = 'hello'
+iadd(a, ' world')
+
+print(a)
