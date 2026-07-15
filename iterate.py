@@ -16,11 +16,11 @@ from itertools import batched
 
 # You can use batched to send bulk API request - Try this example when you have enough Idea about it
 
-def numbers():
+def numbers1():
     for i in range(10):
         yield i
 
-for batch in batched(numbers(), 4):
+for batch in batched(numbers1(), 4):
     print(batch)
 
 # Example of chain how it works
@@ -35,7 +35,7 @@ for comb in combinations(internt_status, 2):
 #Example of how compress works
 
 for comp in compress(internt_status,TruthTable):
-    print(comp)
+    print("comp",comp)
 
 #Example of cycle
 c = cycle(internt_status)
@@ -48,8 +48,8 @@ print(list(dropped_list))
 
 #Exmple of Filter False --> Removes all the element for which conditon is True
 
-false_filter_list = filterfalse(lambda x : x =="Low Speed", internt_status)
-print(list(false_filter_list))
+false_filter_list = filterfalse(lambda x : x =="ultra high", internt_status)
+print("filteFalse",list(false_filter_list))
 
 #Group by Example -
 students = [
@@ -73,4 +73,12 @@ li =[(2, 5), (3, 2), (4, 3)]
 
 new_li = list(starmap(pow, li))
 
+from operator import *
 print(new_li)
+print(list(numbers))
+print(list(accumulate(numbers,mul, initial=200)))
+print(list(batched(numbers,2)))
+print(list(chain(internt_status, result, result2)))
+print(list(combinations(internt_status,5)))
+a,b = list(tee(numbers))
+print(list(a),list(b))
