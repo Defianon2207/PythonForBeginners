@@ -166,3 +166,65 @@ print(PurePath('a/b.py').match('*.py'))
 #Read about with_name, with_stem, with_suffix
 
 #Moving to concrete path
+
+#Python reading the 
+
+p = Path("../Notes/FileSystem.txt")
+print("Does Path exists: ","Yes, it exists." if p.exists() else "No, this file doesn't exist.")
+with p.open('r') as file:
+    for line in file:
+        print(line, end="")
+
+
+#Python URI
+
+uri = Path.from_uri('file:///Users/rahulsingh/Desktop/Python-Streams/DDoS/FileSystem')
+print(uri)
+print(type(uri))
+
+#Example of .home
+
+home = Path.home()
+print(home)
+
+#Example of expanduser
+
+p = Path("~/Desktop")
+print(p.expanduser())
+print(Path.cwd())
+
+# Absolute example
+
+p = Path("FileSystem.txt")
+print("Absolute Path : ",p.absolute())
+
+#Example of Resolve
+
+p = Path()
+print("Resolved Path",p.resolve())
+
+#Example of SymLink
+
+# link = Path("myLink") #Delete the myLink file when you want to rerun this file
+# link.symlink_to("../Notes/FileSystem.txt")
+
+# print(link.readlink())
+
+#Example of stat
+
+p = Path("../Notes/FileSystem.txt")
+print(p.stat().st_size, "bytes", p.stat().st_mode)
+# print(list[p.stat()])
+#is_socket()
+#is_mount()
+#is_dir()
+#is_file()
+#is_stat()
+#is_lstat()
+#exists()
+#is_symlink()
+
+
+
+
+
