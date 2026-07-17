@@ -1,4 +1,4 @@
-from pathlib import Path, PurePath, PurePosixPath
+from pathlib import Path, PurePath, PurePosixPath, PureWindowsPath
 import os
 
 p = Path("..")
@@ -113,3 +113,56 @@ print(os.fsencode(p))
 #Accessing different parts
 p = PurePath('/usr/bin/python3')
 print(p.parts)
+
+print(PurePosixPath("/etc").parser)
+print(PureWindowsPath("C:/Windows").parser)
+
+#POSIX Relative PATH
+p = PurePosixPath("etc/nginx")
+
+print("Drive :", p.drive)
+print("Root  :", p.root)
+print("Anchor:", p.anchor)
+
+
+#Example of parent and parents 
+
+
+p = PurePosixPath("/home/rahul/projects/ai")
+print(p.parent)
+
+#Resolve
+p = Path("foo/..")
+
+print("Resolve",p.resolve())
+
+
+#PurePath.name¶
+#A string representing the final path component, excluding the drive and root, if any:
+p = PurePosixPath("/home/rahul/projects/ai.txt")
+print(p.suffix, p.stem) # It also has suffixes
+
+#Absolut path
+print(PurePosixPath('/a/b').is_absolute())
+print(PurePosixPath('a/b').is_absolute())
+
+#Relative to
+p = PurePath('/etc/passwd')
+print(p.is_relative_to('/etc'))
+
+#Is_reserved used in windows
+
+#Join Path
+
+print(PurePosixPath('/etc').joinpath('passwd'))
+
+#Full_match
+print(PurePath('a/b.py').full_match('a/*.py'))
+print(PurePath('a/b.py').full_match('*.py'))
+
+#Match
+print(PurePath('a/b.py').match('*.py'))
+
+#Read about with_name, with_stem, with_suffix
+
+#Moving to concrete path
