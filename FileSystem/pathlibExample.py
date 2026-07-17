@@ -1,4 +1,5 @@
-from pathlib import Path, PurePath
+from pathlib import Path, PurePath, PurePosixPath
+import os
 
 p = Path("..")
 print(p)
@@ -56,4 +57,59 @@ z = PurePath('File','/Desktop','/usr','/etc','log')
 print(z)
 
 # You can create PurePosixPath without even touching the file system
-# PathLib.PurePosicPath()
+# PathLib.PurePosicPath() similary PathLib.PureWindowsPath
+
+files = {
+      PurePosixPath("main.py"): "Python file",
+        PurePosixPath("README.md"): "Documentation"
+}
+
+print(files[PurePosixPath("main.py")])
+
+#Paths of same flavor are comparable
+
+print(
+    PurePosixPath("extrnl") ==
+    PurePosixPath("extrnl")
+)
+
+print(
+    PurePosixPath("extrnl") ==
+    PurePosixPath("extrnlD")
+)
+
+# Paths are case sensitive
+
+print(
+     PurePosixPath("extrnl") ==
+     PurePosixPath("extrnL")
+)
+
+# / example for creating path
+
+new_path = PurePath('/etc')
+new_path2 = new_path/PurePath('bin')
+
+print(new_path2, type(new_path2))
+
+#If path is absolute it only accept the things on righ to left
+
+new_path3 = PurePath('/bin')/new_path
+print(new_path3)
+
+#paths can be easily converted to string
+
+str_eg = PurePath('/etc')
+convert_to_string = str(str_eg)
+
+#Check the type both are different, similarly it can be converted into 
+print(type(str_eg),type(convert_to_string))
+
+p = PurePosixPath("/etc")
+
+print(bytes(p))
+print(os.fsencode(p))
+
+#Accessing different parts
+p = PurePath('/usr/bin/python3')
+print(p.parts)
