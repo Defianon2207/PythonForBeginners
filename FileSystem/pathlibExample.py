@@ -223,7 +223,8 @@ print(p.stat().st_size, "bytes", p.stat().st_mode)
 #is_lstat()
 #exists()
 #is_symlink()
-
+#is_junction() -- Not for Posix
+#
 
 
 
