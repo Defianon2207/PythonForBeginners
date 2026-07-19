@@ -60,6 +60,5 @@ start = "project/src"
 print(os.path.relpath(path, start))
 
 #example of splitdrive
-import os
 
 print(os.path.splitroot("/home/rahul/report.txt"))
