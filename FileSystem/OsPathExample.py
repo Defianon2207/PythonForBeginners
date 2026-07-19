@@ -24,3 +24,30 @@ print(os.path.commonprefix(paths))
 path = "/home/rahul/Documents/report.pdf"
 
 print(os.path.dirname(path))
+
+#lexists() if you ask about danggling symlink it will return true
+#Expand user tilde is shorthand for current user directory 
+
+print(os.path.expanduser("~/Documents"))
+
+
+#Example of exapandvars
+path = "$HOME/Documents"
+
+print(os.path.expandvars(path))
+
+#Example of a getatime()
+
+timestamp = os.path.getatime("OsPathExample.py")
+
+print(timestamp)
+
+#Read about getmtime and getctime
+
+#getSize of the file in bytes
+print(os.path.getsize('OsPathExample.py'))
+
+#Read about islink, isjunction, ismount, isfile,isdir, path.join
+
+#isReserved is not a function of posixPath
+# print(os.path.isreserved("report.txt"))
