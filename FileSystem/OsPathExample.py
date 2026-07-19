@@ -51,3 +51,15 @@ print(os.path.getsize('OsPathExample.py'))
 
 #isReserved is not a function of posixPath
 # print(os.path.isreserved("report.txt"))
+
+#example of relpath
+
+path = "project/images/logo.png"
+start = "project/src"
+
+print(os.path.relpath(path, start))
+
+#example of splitdrive
+import os
+
+print(os.path.splitroot("/home/rahul/report.txt"))
