@@ -45,3 +45,6 @@ comparison = filecmp.dircmp(
 )
 
 comparison.report()
+
+## Note - Read further in the documentation 
+# https://docs.python.org/3/library/tempfile.html
