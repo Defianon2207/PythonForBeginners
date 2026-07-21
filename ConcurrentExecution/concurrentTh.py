@@ -57,9 +57,134 @@ for customer in customers:
 # Start all orders
 for thread in threads:
     thread.start()
+    current = threading.current_thread()
+    print("Current",current)
+    print("ThreadName",current.name)
 
+print("Threading count",threading.active_count())
 # Wait until all orders are completed
 for thread in threads:
     thread.join()
 
 print("All orders are ready!")
+
+
+#Custom Hook
+def custom_hook(args):
+    print("A thread crashed!")
+    print("Thread:", args.thread.name)
+    print("Exception type:", args.exc_type.__name__) # exc_type
+    print("Exception message:", args.exc_value) # exc_value
+
+threading.excepthook = custom_hook
+
+def divide():
+    print(10 / 0)  # Uncaught exception
+
+worker = threading.Thread(
+    target=divide,
+    name="MathWorker"
+)
+
+worker.start()
+print("Current thread:", threading.current_thread().name)
+print("Python thread ID:", threading.get_ident())
+worker.join()
+
+print("Main thread continues")
+
+# Example of Magic Cookie
+
+thread_data = {}
+lock = threading.Lock()
+
+def process(user):
+    thread_id = threading.get_ident()
+
+    with lock:
+        thread_data[thread_id] = {
+            "thread": threading.current_thread().name,
+            "user": user
+        }
+
+    time.sleep(1)
+
+threads = [
+    threading.Thread(target=process, args=("Rahul",), name="Worker-1"),
+    threading.Thread(target=process, args=("Aman",), name="Worker-2"),
+    threading.Thread(target=process, args=("Priya",), name="Worker-3"),
+]
+
+for thread in threads:
+    thread.start()
+
+for thread in threads:
+    thread.join()
+
+print(thread_data)
+
+
+# Example of lock
+balance = 100
+lock = threading.Lock()
+def withdraw_balance(amount):
+    global balance
+
+    with lock:
+        if balance > amount:
+            print(
+                f"{threading.current_thread().name} "
+                f"is withdrawing ₹{amount}",
+                threading.get_ident(),
+                threading.get_native_id()
+            )
+            current_balance = balance
+            time.sleep(0.1)
+            balance = current_balance - amount
+            print("Withdrawal successful")
+        else:
+            print(
+                f"{threading.current_thread().name}: "
+                "Insufficient balance"
+            )
+
+threads = [
+    threading.Thread(target = withdraw_balance, args = (80,)),
+    threading.Thread(target=withdraw_balance, args=(80,))
+]
+
+for thread in threads:
+    thread.start()
+
+for thread in threads:
+    thread.join()
+
+print("Final balance:", balance)
+
+
+#Example of threading.enumerate()
+def task():
+    time.sleep(3)
+
+threads = []
+
+for number in range(3):
+    thread = threading.Thread(
+        target=task,
+        name=f"Worker-{number + 1}"
+    )
+    threads.append(thread)
+    thread.start()
+
+active_threads = threading.enumerate()
+
+for thread in active_threads:
+    print(
+        "Name:", thread.name,
+        "| ident:", thread.ident,
+        "| native ID:", thread.native_id,
+        "| daemon:", thread.daemon
+    )
+
+for thread in threads:
+    thread.join()
