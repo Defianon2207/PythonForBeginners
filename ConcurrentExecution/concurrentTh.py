@@ -237,3 +237,63 @@ thread.join()
 # Disable profiling for future threads
 threading.setprofile(None)
 
+# Another example 
+start_times = {}
+lock = threading.Lock()
+
+
+def profiler(frame, event, arg):
+    function_name = frame.f_code.co_name
+    thread_id = threading.get_ident()
+
+    if function_name not in {"download", "process"}:
+        return
+
+    key = (thread_id, id(frame))
+
+    if event == "call":
+        with lock:
+            start_times[key] = time.perf_counter()
+
+    elif event == "return":
+        with lock:
+            started = start_times.pop(key, None)
+
+        if started is not None:
+            elapsed = time.perf_counter() - started
+            thread_name = threading.current_thread().name
+
+            print(
+                f"[{thread_name}] {function_name}() "
+                f"took {elapsed:.3f} seconds"
+            )
+
+
+def download():
+    time.sleep(1)
+
+
+def process():
+    time.sleep(0.5)
+
+
+def worker():
+    download()
+    process()
+
+
+threading.setprofile(profiler)
+
+threads = [
+    threading.Thread(target=worker, name="Worker-1"),
+    threading.Thread(target=worker, name="Worker-2")
+]
+
+for thread in threads:
+    thread.start()
+
+for thread in threads:
+    thread.join()
+
+threading.setprofile(None)
+
