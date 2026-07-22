@@ -297,3 +297,46 @@ for thread in threads:
 
 threading.setprofile(None)
 
+#Example of threading.setprofile_all_threads(func)
+
+stop_event = threading.Event()
+
+
+def perform_work():
+    time.sleep(0.1)
+
+
+def existing_worker():
+    while not stop_event.is_set():
+        perform_work()
+
+
+worker = threading.Thread(
+    target=existing_worker,
+    name="ExistingWorker"
+)
+
+# Start before installing the profiler
+worker.start()
+
+time.sleep(0.3)
+
+
+def profiler(frame, event, arg):
+    if event == "call" and frame.f_code.co_name == "perform_work":
+        print(
+            f"[{threading.current_thread().name}] "
+            "perform_work() called"
+        )
+
+
+# Also targets currently executing Python threads
+threading.setprofile_all_threads(profiler)
+
+time.sleep(0.5)
+
+stop_event.set()
+worker.join()
+
+threading.setprofile_all_threads(None)
+
