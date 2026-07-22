@@ -188,3 +188,52 @@ for thread in active_threads:
 
 for thread in threads:
     thread.join()
+
+
+#Example of Trace call
+
+def trace_calls(frame,event,arg):
+    if event == "call":
+        function_name = frame.f_code.co_name
+        thread_name = threading.curre_thread().name
+
+        print(
+            f"{thread_name}",
+            f"calling functio {function_name}"
+        )
+    return trace_calls
+
+#Example of SetProfile
+
+def profiler(frame, event, arg):
+    function_name = frame.f_code.co_name
+    thread_name = threading.current_thread().name
+
+    if event == "call":
+        print(f"[{thread_name}] Entering {function_name}()")
+
+    elif event == "return":
+        print(f"[{thread_name}] Leaving {function_name}()")
+
+def downlaod():
+    time.sleep(1)
+    return "Downladed data "
+
+def worker():
+    data = downlaod()
+    print(data)
+
+# Apply profiler to subsequently created threads
+threading.setprofile(profiler)
+
+thread = threading.Thread(
+    target=worker,
+    name="DownloadWorker"
+)
+
+thread.start()
+thread.join()
+
+# Disable profiling for future threads
+threading.setprofile(None)
+
