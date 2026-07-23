@@ -237,7 +237,7 @@ thread.join()
 # Disable profiling for future threads
 threading.setprofile(None)
 
-# Another example 
+# Another example for setprofile_for_all_event
 start_times = {}
 lock = threading.Lock()
 
@@ -317,6 +317,7 @@ worker = threading.Thread(
 )
 
 # Start before installing the profiler
+print("****setprofile_all_threads******")
 worker.start()
 
 time.sleep(0.3)
@@ -339,4 +340,75 @@ stop_event.set()
 worker.join()
 
 threading.setprofile_all_threads(None)
+
+
+# Write a programm to check how much time each function takes to execute
+# It should include downloadData, processData and saveData
+
+startTime = {}
+threadLock = threading.Lock()
+
+monitored_functions = {
+    "download_data",
+    "process_data",
+    "save_data"
+}
+
+def download_data():
+    time.sleep(2)
+    print("Download completed!")
+
+def process_data():
+    time.sleep(3)
+    print("Data Processed !")
+
+def save_data():
+    time.sleep(1)
+    print("Data Saved !")
+
+def worker():
+    download_data()
+    process_data()
+    save_data()
+
+threads=[
+    threading.Thread(target=worker, name ="Dummy_worker")
+]
+
+def profile(frame,event,args):
+    function_name = frame.f_code.co_name
+    if function_name not in monitored_functions:
+        return
+    key = (threading.get_ident(), id(frame))
+
+    if event == "call":
+            with threadLock:
+                start_times[key] = time.perf_counter()
+    elif event == "return":
+           end_time = time.perf_counter()
+
+           with threadLock:
+            start_time = start_times.pop(key,None)
+            if start_time is not None:
+                duration = end_time -start_time
+                print(
+                f"[{thread_name}] {function_name}() "
+                f"took {elapsed_time:.2f} seconds"
+            )
+
+# Install the profiler before starting the threads
+threading.setprofile_all_threads(profile)
+
+
+for thread in threads:
+    thread.start()
+
+
+for thread in threads:
+    thread.join()
+
+# Disable profiling
+threading.setprofile_all_threads(None)
+
+print("All tasks completed!")
 
