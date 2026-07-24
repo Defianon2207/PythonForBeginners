@@ -417,6 +417,33 @@ print("All tasks completed!")
 
 print(threading.TIMEOUT_MAX)
 
+# Lock.acquire Thread 
+
+lock = threading.Lock()
+
+def hold_lock():
+    with lock:
+        print("Worker acquired the lock")
+        time.sleep(3)
+        print("Worker released the lock")
+
+worker = threading.Thread(target=hold_lock)
+worker.start()
+
+time.sleep(0.1)
+
+acquired = lock.acquire(timeout=1)
+
+if acquired:
+    try:
+        print("Main thread acquired the lock")
+    finally:
+        lock.release()
+else:
+    print("Main thread timed out")
+
+worker.join()
+
 
 
 
