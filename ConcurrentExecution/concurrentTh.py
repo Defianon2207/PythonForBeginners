@@ -339,7 +339,7 @@ time.sleep(0.5)
 stop_event.set()
 worker.join()
 
-threading.setprofile_all_threads(None)
+# threading.setprofile_all_threads(None)
 
 
 # Write a programm to check how much time each function takes to execute
@@ -348,11 +348,7 @@ threading.setprofile_all_threads(None)
 startTime = {}
 threadLock = threading.Lock()
 
-monitored_functions = {
-    "download_data",
-    "process_data",
-    "save_data"
-}
+
 
 def download_data():
     time.sleep(2)
@@ -374,7 +370,11 @@ def worker():
 threads=[
     threading.Thread(target=worker, name ="Dummy_worker")
 ]
-
+monitored_functions = {
+    "download_data",
+    "process_data",
+    "save_data"
+}
 def profile(frame,event,args):
     function_name = frame.f_code.co_name
     if function_name not in monitored_functions:
@@ -411,4 +411,16 @@ for thread in threads:
 threading.setprofile_all_threads(None)
 
 print("All tasks completed!")
+
+
+# threading.getprofile() this gets the profiler function set by setProfile
+
+print(threading.TIMEOUT_MAX)
+
+
+
+
+        
+
+        
 
