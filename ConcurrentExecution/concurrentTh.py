@@ -444,6 +444,16 @@ else:
 
 worker.join()
 
+#Threading local 
+
+mydata = threading.local()
+
+# Stored in MainThread's local storage
+mydata.number = 42
+
+print(mydata.number)
+print(mydata.__dict__)
+
 
 
 
