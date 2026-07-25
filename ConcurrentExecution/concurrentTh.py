@@ -454,6 +454,43 @@ mydata.number = 42
 print(mydata.number)
 print(mydata.__dict__)
 
+def worker(number):
+    # Each thread stores its own value
+    mydata.number = number
+
+    time.sleep(1)
+
+    print(
+        f"{threading.current_thread().name}: "
+        f"number={mydata.number}, "
+        f"dictionary={mydata.__dict__}"
+    )
+
+
+threads = [
+    threading.Thread(
+        target=worker,
+        args=(100,),
+        name="Worker-1"
+    ),
+    threading.Thread(
+        target=worker,
+        args=(200,),
+        name="Worker-2"
+    ),
+    threading.Thread(
+        target=worker,
+        args=(300,),
+        name="Worker-3"
+    )
+]
+
+for thread in threads:
+    thread.start()
+
+for thread in threads:
+    thread.join()
+
 
 
 
