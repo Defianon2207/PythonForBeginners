@@ -528,6 +528,43 @@ for thread in threads:
 for thread in threads:
     thread.join()
 
+#Example 
+ession_data = threading.local()
+
+
+def handle_request(user_id):
+    session_data.user_id = user_id
+    session_data.request_count = 0
+
+    for _ in range(3):
+        session_data.request_count += 1
+        time.sleep(0.1)
+
+        print(
+            f"[{threading.current_thread().name}] "
+            f"user={session_data.user_id}, "
+            f"request={session_data.request_count}"
+        )
+
+
+threads = [
+    threading.Thread(
+        target=handle_request,
+        args=("Rahul",),
+        name="RequestWorker-1"
+    ),
+    threading.Thread(
+        target=handle_request,
+        args=("Aman",),
+        name="RequestWorker-2"
+    )
+]
+
+for thread in threads:
+    thread.start()
+
+for thread in threads:
+    thread.join()
 
 
 
