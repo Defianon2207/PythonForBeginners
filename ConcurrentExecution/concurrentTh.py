@@ -491,6 +491,43 @@ for thread in threads:
 for thread in threads:
     thread.join()
 
+#Thread Specific list example
+
+mydata = threading.local()
+
+
+def process_items(items):
+    # Create a separate list for this thread
+    mydata.__dict__.setdefault("widgets", [])
+
+    for item in items:
+        mydata.widgets.append(item)
+
+    print(
+        f"{threading.current_thread().name}: "
+        f"{mydata.widgets}"
+    )
+
+
+threads = [
+    threading.Thread(
+        target=process_items,
+        args=([1, 2, 3],),
+        name="Worker-1"
+    ),
+    threading.Thread(
+        target=process_items,
+        args=([4, 5, 6],),
+        name="Worker-2"
+    )
+]
+
+for thread in threads:
+    thread.start()
+
+for thread in threads:
+    thread.join()
+
 
 
 
