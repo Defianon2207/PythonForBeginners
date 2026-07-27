@@ -19,3 +19,21 @@ thread = DownloadThread("video.mp4")
 
 thread.start()
 thread.join()
+
+#Checking if thread is alive 
+
+def worker():
+    time.sleep(2)
+
+
+thread = threading.Thread(target=worker)
+
+print(thread.is_alive())  # False
+
+thread.start()
+
+print(thread.is_alive())  # Usually True
+
+thread.join()
+
+print(thread.is_alive())  # False
