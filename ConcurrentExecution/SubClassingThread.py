@@ -1,6 +1,7 @@
 import threading
 import time
 
+#Creating a thread by subclassing thread
 
 class DownloadThread(threading.Thread):
     def __init__(self, filename):
@@ -37,3 +38,22 @@ print(thread.is_alive())  # Usually True
 thread.join()
 
 print(thread.is_alive())  # False
+
+
+#Revise subclassing
+
+class SubclassExampleOfThread(threading.Thread):
+    def __init__(self,param):
+        super().__init__(name="Downloader")
+        self.param = param
+
+    def run(self):
+        print(f"Console {self.param}")
+        time.sleep(2)
+        print(f"Finish Console {self.param}")
+
+
+thread = SubclassExampleOfThread("Hey Siri")
+thread.start()
+thread.join()
+
