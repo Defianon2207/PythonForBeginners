@@ -156,3 +156,15 @@ for thread in threads:
 
 for thread in threads:
     thread.join()
+
+#Extension
+
+acquired = lock.acquire(timeout=2)
+
+if acquired:
+    try:
+        perform_work()
+    finally:
+        lock.release()
+else:
+    print("Could not acquire the lock")
