@@ -1,5 +1,7 @@
 import threading
 import time
+from contextvars import ContextVar, copy_context
+
 
 #Creating a thread by subclassing thread
 
@@ -102,3 +104,55 @@ stop_event.set()
 thread.join()
 
 print("Program finished")
+
+#Context Vars
+
+request_id = ContextVar("request_id", default="unknown")
+request_id.set("REQ-101")
+
+
+def worker():
+    print(request_id.get())
+
+
+thread = threading.Thread(
+    target=worker,
+    context=copy_context()
+)
+
+thread.start()
+thread.join()
+
+## Acquire
+
+file_lock = threading.Lock()
+
+
+def save_report(worker_name):
+    print(f"{worker_name}: waiting to write")
+
+    acquired = file_lock.acquire(timeout=2)
+
+    if not acquired:
+        print(f"{worker_name}: file remained busy")
+        return
+
+    try:
+        print(f"{worker_name}: writing report")
+        time.sleep(1)
+        print(f"{worker_name}: report saved")
+    finally:
+        file_lock.release()
+
+
+threads = [
+    threading.Thread(target=save_report, args=("Worker-1",)),
+    threading.Thread(target=save_report, args=("Worker-2",)),
+    threading.Thread(target=save_report, args=("Worker-3",)),
+]
+
+for thread in threads:
+    thread.start()
+
+for thread in threads:
+    thread.join()
