@@ -33,3 +33,34 @@ account.deposit(500)
 
 print("Balance:", account.balance)
 print("Transactions:", account.transactions)
+
+
+class Configuration:
+    def __init__(self):
+        self.settings = {
+            "theme": "dark",
+            "language": "English"
+        }
+
+        self.lock = threading.RLock()
+
+    def set_value(self, key, value):
+        with self.lock:
+            print(f"Setting {key} to {value}")
+            self.settings[key] = value
+
+    def reset(self):
+        with self.lock:
+            print("Reset started")
+
+            # These methods acquire the same lock again
+            self.set_value("theme", "light")
+            self.set_value("language", "English")
+
+            print("Reset completed")
+
+
+config = Configuration()
+config.reset()
+
+print(config.settings)
