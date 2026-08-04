@@ -83,4 +83,50 @@ thread1.join()
 thread2.join()
 
 
+## Example of multiple consumer 
+
+numbers = []
+condition = threading.Condition()
+
+
+def consumer(name):
+    with condition:
+        print(f"{name}: waiting for a number")
+
+        available = condition.wait_for(
+            lambda: len(numbers) > 0,
+            timeout=5
+        )
+
+        if not available:
+            print(f"{name}: timed out")
+            return
+
+        number = numbers.pop(0)
+        print(f"{name}: consumed {number}")
+
+
+def producer():
+    time.sleep(2)
+
+    with condition:
+        numbers.extend([10, 20])
+        print("Producer: produced 10 and 20")
+
+        condition.notify_all()
+
+
+thread1 = threading.Thread(target=consumer, args=("Consumer 1",))
+thread2 = threading.Thread(target=consumer, args=("Consumer 2",))
+thread3 = threading.Thread(target=producer)
+
+thread1.start()
+thread2.start()
+thread3.start()
+
+thread1.join()
+thread2.join()
+thread3.join()
+
+
 
