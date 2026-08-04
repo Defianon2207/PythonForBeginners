@@ -35,3 +35,19 @@ for thread in threads:
     thread.join()
 
 server_thread.join()
+
+
+#Example of timer
+def hello():
+    print("Hello, world!")
+
+
+timer = threading.Timer(3, hello)
+timer.start()
+
+print("Timer started")
+
+# Wait for the timer thread to finish
+timer.join()
+
+print("Program finished")
