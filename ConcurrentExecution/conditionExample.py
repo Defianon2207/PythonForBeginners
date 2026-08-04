@@ -128,5 +128,26 @@ thread1.join()
 thread2.join()
 thread3.join()
 
+# Example for notified
+
+# def consumer():
+#     with condition:
+#         while not numbers:
+#             print("Waiting...")
+#             notified = condition.wait(timeout=3)
+
+#             if not notified:
+#                 print("Timed out")
+#                 return
+
+# acquire()    → lock the shared state
+# release()    → unlock the shared state
+# locked()     → check whether it is locked
+# wait()       → unlock, sleep, then lock again
+# wait_for()   → wait until a predicate becomes true
+# notify()     → wake one or n waiters
+# notify_all() → wake every waiter
+
+
 
 
