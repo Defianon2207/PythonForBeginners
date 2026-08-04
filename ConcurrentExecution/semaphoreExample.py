@@ -44,3 +44,35 @@ print("All workers finished")
 # Only 3 cars can park at a time.
 # Each car stays for 2 seconds.
 # When one car leaves, another waiting car can enter.
+
+semaphore = threading.Semaphore(3)
+slot_lock = threading.Lock()
+
+cars_slot=[0,0,0]
+
+def requestParking(car_number):
+    with semaphore:
+        with slot_lock:
+            lot = cars_slot.index(0)
+            cars_slot[lot] = 1
+        print(f"The lot number {lot} is occupied by car {car_number}")    
+        time.sleep(3)
+        with slot_lock:
+            cars_slot[lot] = 0
+        print(f"The lot number {lot} is free now")
+
+threads =[]
+
+for i in range(1,7):
+    thread = threading.Thread(
+        target = requestParking,
+        args=(i,),
+        name = f"car {i}"
+    )
+    threads.append(thread)
+
+for thread in threads:
+    thread.start()
+
+for thread in threads:
+    thread.join()
