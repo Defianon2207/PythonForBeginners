@@ -12,21 +12,41 @@ print(math.comb(6,1))
 numbers = [2, 1, 5, 1, 3, 2]
 k = 3
 sum=[]
+combination_sums = []
 
-#Generate sum of all combinations possible
 i = 0
-while i < len(numbers):
-    j = 0
-    m = numbers[:i] + numbers[i+1:]
-    while j < len(m)-1:
-        #Some logic
-        z=0
-        o = m[:j] + m[j+1:]
-        while z < len(o)-1:
-            sum.append(numbers[i] + m[j] + o[z])
-            z=z+1
-        j =j+1
-    i = i + 1
+
+while i < len(numbers) - 2:
+    j = i + 1
+
+    while j < len(numbers) - 1:
+        z = j + 1
+
+        while z < len(numbers):
+            combination = [
+                numbers[i],
+                numbers[j],
+                numbers[z]
+            ]
+
+            combination_sum = (
+                numbers[i] +
+                numbers[j] +
+                numbers[z]
+            )
+
+            print(combination, "→", combination_sum)
+            combination_sums.append(combination_sum)
+
+            z += 1
+
+        j += 1
+
+    i += 1
+
+print("Combination sums:", combination_sums)
+print("Generated combinations:", len(combination_sums))
+print("Expected combinations:", math.comb(len(numbers), k))
 
 # print(sum,len(sum))
 
