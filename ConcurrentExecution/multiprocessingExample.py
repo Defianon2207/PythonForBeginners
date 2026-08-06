@@ -58,10 +58,9 @@ if __name__ == '__main__':
     # p = ctx.Process(target=spawnWorker)
     # p.start()
     # p.join()
-#Using get_strat_method()
+#Using get_start_method()
  
     numbers.append(100)
-
     p = multiprocessing.Process(target=worker)
     p.start()
     p.join()
