@@ -7,20 +7,15 @@ number = []
 def worker():
     print("Child PID:", os.getpid())
     print("Parent PID:", os.getppid())
-    print("Number:", number)
     number.append(200)
-    print("Child:", number)
+    print("Child:", number) #Guess the output
 
 if __name__ == "__main__":
-    # ctx = get_context("fork")
-
-    # p = ctx.Process(target=worker)
-    # p.start()
-    # p.join()
+   
     multiprocessing.set_start_method("fork")
     number.append(100)
 
     p = multiprocessing.Process(target=worker)
     p.start()
     p.join()
-    print("parent Number:", number)
+    print("parent:", number) # Guess the Output
