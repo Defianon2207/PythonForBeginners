@@ -20,15 +20,15 @@ if __name__ == '__main__':
         res = pool.apply_async(f, (20,))      # runs in *only* one process
         print(res.get(timeout=1))             # prints "400"
 
-        # evaluate "os.getpid()" asynchronously
+    #     # evaluate "os.getpid()" asynchronously
         res = pool.apply_async(os.getpid, ()) # runs in *only* one process
         print(res.get(timeout=1))             # prints the PID of that process
 
-        # launching multiple evaluations asynchronously *may* use more processes
+    #     # launching multiple evaluations asynchronously *may* use more processes
         multiple_results = [pool.apply_async(os.getpid, ()) for i in range(4)]
         print([res.get(timeout=1) for res in multiple_results])
 
-        # make a single worker sleep for 10 seconds
+    #     # make a single worker sleep for 10 seconds
         res = pool.apply_async(time.sleep, (10,))
         try:
             print(res.get(timeout=1))
@@ -37,5 +37,12 @@ if __name__ == '__main__':
 
         print("For the moment, the pool remains available for more work")
 
-    # exiting the 'with'-block has stopped the pool
+    # # exiting the 'with'-block has stopped the pool
     print("Now the pool is closed and no longer available")
+
+
+#  map()             = Do many tasks and wait for the ordered list
+# imap_unordered()  = Do many tasks and yield results as they finish
+# apply_async()     = Submit one task and continue immediately
+# get()             = Retrieve the asynchronous result later
+# get(timeout=1)    = Wait no longer than one second
