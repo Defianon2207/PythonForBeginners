@@ -12,6 +12,15 @@ def child_work(connection):
     connection.send("Hello from child")
     connection.close()
 
+def producer(queue):
+    for _ in range(1,6):
+        queue.put(_)
+
+def consumer(queue):
+    for _ in range(1,6):
+        print("Consumed :",queue.get())
+
+
 if __name__ == "__main__":
     queue = Queue()
     original = [1, 2, 3]
@@ -46,3 +55,20 @@ if __name__ == "__main__":
 
 # The first connection can only receive.
 # The second connection can only send.
+
+    queue = Queue()
+
+    process = [Process(
+        target = producer,
+        args =(queue,)
+    ), Process(
+        target = consumer,
+        args =(queue,)
+    )]
+
+    process[0].start()
+    process[1].start()
+    process[0].join()
+    process[1].join()
+    queue.close()
+    queue.join_thread()
