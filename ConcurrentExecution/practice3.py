@@ -1,4 +1,5 @@
 from multiprocessing import Process, Value
+from multiprocessing import Array
 
 
 def increase(counter, repetitions):
@@ -22,3 +23,11 @@ if __name__ == "__main__":
         process.join()
 
     print(counter.value)  # 400000
+
+    numbers = Array("i", [10, 20, 30, 40])
+
+    print(numbers[:])  # [10, 20, 30, 40]
+
+    numbers[1] = 99
+
+    print(numbers[:])  # [10, 99, 30, 40]
