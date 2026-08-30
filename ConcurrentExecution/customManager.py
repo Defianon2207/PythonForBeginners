@@ -4,48 +4,63 @@ from multiprocessing.managers import BaseManager
 
 class BankAccount:
     def __init__(self, balance=0):
-        self.balance = balance
+        self._balance = balance
 
     def deposit(self, amount):
-        self.balance += amount
+        self._balance += amount
 
     def withdraw(self, amount):
-        if amount > self.balance:
+        if amount > self._balance:
             return False
 
-        self.balance -= amount
+        self._balance -= amount
         return True
 
     def get_balance(self):
-        return self.balance
+        return self._balance
 
 
-# Create a customized manager class
 class BankManager(BaseManager):
     pass
 
 
-# Register BankAccount with BankManager
 BankManager.register(
     "BankAccount",
-    callable=BankAccount
+    callable=BankAccount,
+    exposed=(
+        "deposit",
+        "withdraw",
+        "get_balance",
+    )
 )
 
 
-def worker(account, amount):
+def deposit_money(account, amount):
     account.deposit(amount)
+
+
+def withdraw_money(account, amount):
+    successful = account.withdraw(amount)
+
+    print(
+        f"Withdraw ₹{amount}:",
+        "successful" if successful else "failed"
+    )
 
 
 if __name__ == "__main__":
     with BankManager() as manager:
-        # The actual BankAccount lives in the manager process.
-        # This variable contains a proxy.
         account = manager.BankAccount(1_000)
 
         processes = [
-            Process(target=worker, args=(account, 100)),
-            Process(target=worker, args=(account, 200)),
-            Process(target=worker, args=(account, 300)),
+            Process(
+                target=deposit_money,
+                args=(account, 500)
+            ),
+            Process(
+                target=withdraw_money,
+                args=(account, 200)
+            ),
         ]
 
         for process in processes:
