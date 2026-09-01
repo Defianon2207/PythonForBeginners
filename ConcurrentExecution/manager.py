@@ -19,7 +19,7 @@ MyManager.register("Counter", Counter)
 
 if __name__ == "__main__":
     manager = MyManager()
-    manager.start()
+    manager.start() # This can be skipped if you use with Mymanager as manager this will eliminated the above 2 lines
 
     counter = manager.Counter()
 
