@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 import time
+from urllib.request import urlopen
 
 
 def add(a, b):
@@ -51,7 +52,25 @@ with ThreadPoolExecutor(max_workers=4) as executor:
 
     print("square result",list(future))
 
+# threadpool for network 
 
+def download_size(url):
+    with urlopen(url) as response:
+        content = response.read()
+        return url, len(content)
+
+
+urls = [
+    "https://www.python.org",
+    "https://docs.python.org",
+    "https://pypi.org"
+]
+
+with ThreadPoolExecutor(max_workers=3) as executor:
+    results = executor.map(download_size, urls)
+
+    for url, size in results:
+        print(url, size)
 
 
 #     5. Useful Future methods
