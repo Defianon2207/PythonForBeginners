@@ -1,19 +1,18 @@
-from concurrent import interpreters
+import subprocess
 
-first = interpreters.create()
-second = interpreters.create()
+result = subprocess.run(
+    [
+        "python3",
+        "-c",
+        """
+import sys
+print("Normal message")
+print("Error message", file=sys.stderr)
+"""
+    ],
+    capture_output=True,
+    text=True
+)
 
-first.exec("""
-message = "Created inside the first interpreter"
-print(message)
-""")
-
-second.exec("""
-try:
-    print(message)
-except NameError:
-    print("The second interpreter cannot see message")
-""")
-
-first.close()
-second.close()
+print("STDOUT:", result.stdout.strip())
+print("STDERR:", result.stderr.strip())
