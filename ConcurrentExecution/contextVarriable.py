@@ -25,8 +25,9 @@ print(user.get())  # Guest
 token = user.set("Rahul")
 
 print(user.get())  # Rahul
-
+print(token.old_value)
 user.reset(token)
 
 print(user.get())  
+
 asyncio.run(main())
