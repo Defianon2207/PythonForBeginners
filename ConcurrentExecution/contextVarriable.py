@@ -27,6 +27,7 @@ token = user.set("Rahul")
 print(user.get())  # Rahul
 print(token.old_value)
 user.reset(token)
+#print(empty_context.get(user)) how to get the context empty
 
 print(user.get())  
 
