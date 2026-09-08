@@ -20,6 +20,10 @@ async def open_dashboard():
     print(f"Welcome, {current_user.get()}!")
 
 
-with asyncio.Runner() as runner:
-    runner.run(login())
-    runner.run(open_dashboard())
+# with asyncio.Runner() as runner:
+#     runner.run(login())
+#     runner.run(open_dashboard())
+
+#     with asyncio.Runner() as runner:
+#     runner.run(first_task())
+#     runner.run(second_task())
