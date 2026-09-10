@@ -42,6 +42,15 @@ async def main():
         download("FileC", 3)
     )
 
+# Use TaskGroup when you need all the result to be successful use gather when you want to handle errors individually
+# async with asyncio.TaskGroup() as tg:
+#     user_task = tg.create_task(fetch_user())
+#     orders_task = tg.create_task(fetch_orders())
+#     balance_task = tg.create_task(fetch_balance())
+# 3 Important awaitables in the asyncio
+# 1) Coroutine
+# 2) Task
+# 3) Futures
 
 # Entry point to run the asynchronous event loop
 if __name__ == "__main__":
