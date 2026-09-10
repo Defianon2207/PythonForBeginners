@@ -36,6 +36,13 @@ async def main():
     result = await coroutine_object
     print("result",result)
 
+    result =await asyncio.gather(
+        download("FileA",2),
+        download("FileB",1),
+        download("FileC", 3)
+    )
+
+
 # Entry point to run the asynchronous event loop
 if __name__ == "__main__":
     asyncio.run(main())
