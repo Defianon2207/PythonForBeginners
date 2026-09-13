@@ -20,3 +20,11 @@ async def main():
     print("Characters written:", characters_written)
 
 asyncio.run(main())
+
+#Blocking Operation 
+# To create b;lockign operation your you to use to_thread. To create use thread while maintaining the routes 
+# asyncio.gather(asyncio.to_threads(functionName))
+# 
+#
+#
+#
