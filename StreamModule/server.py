@@ -1,25 +1,25 @@
 import asyncio
 
 async def handle_client(reader, writer):
-    # Information about the connected client
     address = writer.get_extra_info("peername")
-    print(f"Client connected: {address}")
 
-    # Wait for up to 100 bytes
-    data = await reader.read(100)
+    try:
+        while True:
+            data = await reader.readline()
 
-    message = data.decode()
-    print(f"Receivedee: {message!r}")
+            if not data:
+                break
 
-    # Send the same data back
-    print(f"Sending back: {message!r}")
-    writer.write(data)
-    await writer.drain()
+            message = data.decode().rstrip("\n")
+            print(f"{address}: {message}")
 
-    # Close this client's connection
-    print(f"Closing connection: {address}")
-    writer.close()
-    await writer.wait_closed()
+            writer.write(data)
+            await writer.drain()
+
+    finally:
+        writer.close()
+        await writer.wait_closed()
+        print(f"Disconnected: {address}")
 
 async def main():
     server = await asyncio.start_server(
@@ -27,12 +27,6 @@ async def main():
         "127.0.0.1",
         8888,
     )
-
-    addresses = ", ".join(
-        str(socket.getsockname())
-        for socket in server.sockets
-    )
-    print(f"Server running on {addresses}")
 
     async with server:
         await server.serve_forever()
