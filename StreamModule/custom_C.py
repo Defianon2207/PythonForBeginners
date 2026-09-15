@@ -15,11 +15,11 @@ async def main():
             byteorder="big",
         )
 
-    writer.write(b"Create order 123<END>")
-    await writer.drain()
+        writer.write(b"Create order 123<END>")
+        await writer.drain()
 
-    response = await reader.readuntil(b"<END>")
-    print(response.removesuffix(b"<END>").decode())
+        response = await reader.readuntil(b"<END>")
+        print(response.removesuffix(b"<END>").decode())
 
     finally:
         writer.close()
