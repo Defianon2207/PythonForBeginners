@@ -32,3 +32,17 @@ async def main():
         await server.serve_forever()
 
 asyncio.run(main())
+
+#Note 
+#Starting with Python 3.13, separator may be a tuple:
+# data = await reader.readuntil(
+#     (b"\n", b"\r\n", b"<END>")
+# )
+
+#LIMITOverrunError
+
+# reader, writer = await asyncio.open_connection(
+#     "127.0.0.1",
+#     8888,
+#     limit=1024,
+# )
