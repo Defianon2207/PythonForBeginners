@@ -26,3 +26,12 @@ async def main():
         await writer.wait_closed()
 
 asyncio.run(main())
+
+
+#keep a note of this 
+#data = await reader.readuntil(separator)
+
+# If the stream contains:
+# b"Hello World<END>Remaining data"
+# the result is:
+# b"Hello World<END>"
