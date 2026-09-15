@@ -7,13 +7,13 @@ async def main():
     )
 
     try:
-        message = "Hello from the client"
-        data = message.encode()
+        # message = "Hello from the client"
+        # data = message.encode()
 
-        header = len(data).to_bytes(
-            4,
-            byteorder="big",
-        )
+        # header = len(data).to_bytes(
+        #     4,
+        #     byteorder="big",
+        # )
 
         writer.write(b"Create order 123<END>")
         await writer.drain()
