@@ -40,9 +40,14 @@ asyncio.run(main())
 # )
 
 #LIMITOverrunError
-
 # reader, writer = await asyncio.open_connection(
 #     "127.0.0.1",
 #     8888,
 #     limit=1024,
 # )
+
+# reader.feed_eof()
+
+# It tells the StreamReader that no more bytes will arrive.
+
+# Application code normally should not call it. The asyncio transport/protocol layer calls it when the underlying connection reaches EOF.
