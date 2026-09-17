@@ -18,5 +18,18 @@ async def run(cmd):
     if stderr:
         print(f"[stderr]\n{stderr.decode()}")
 
+    command = 'sleep 1; echo "Hello from shell"'
+
+    proc = await asyncio.create_subprocess_shell(
+        command,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+
+    stdout, stderr = await proc.communicate()
+
+    print(stdout.decode().strip())
+    print("Exit code:", proc.returncode)
+
 
 asyncio.run(run("ls"))
