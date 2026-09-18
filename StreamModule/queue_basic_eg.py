@@ -43,3 +43,14 @@ async def main():
 
 
 asyncio.run(main())
+
+
+#OTHER METHODS
+
+#queue = asyncio.Queue(maxsize=0)
+#Queue.qsize()
+#queue.empty()
+#queue.full()
+#queue.no_wait()
+#task_done()
+#queue.join()
