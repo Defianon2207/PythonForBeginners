@@ -30,3 +30,7 @@ finally:
 
     print("Executor shut down")
     loop.close()
+
+
+    # Use shutdown with timeout
+    # loop.shutdown_default_executor(timeout=5) 
