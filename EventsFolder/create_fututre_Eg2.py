@@ -51,3 +51,8 @@ async def main():
 
 
 asyncio.run(main())
+
+#loop = Get_running_loop
+# future = loop.create_future
+# loop.call_soon_threadsafe()
+# loop.call_soon_threadsafe(future.set_result, result)
