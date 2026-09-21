@@ -15,6 +15,7 @@ async def main():
     modified_task = loop.create_task(show_user(),context = modified_user)
     await default_task
     await modified_task
+    print("Main User", user.get())
 
 
 asyncio.run(main())
