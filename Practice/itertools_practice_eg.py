@@ -20,3 +20,13 @@ print(batched_data )
 
 for k in batched_data:
     print("Batch re Batch ",k)
+
+
+#Examples of chain
+internt_status = ["highSpeed", "Low Speed", "medium speed", "ultra high", "suspended", "blocked"]
+Data = ["ABCD", "DEFGH", "JKLMN"]
+
+
+for x in chain(internt_status, Data):
+    print(x)
+
