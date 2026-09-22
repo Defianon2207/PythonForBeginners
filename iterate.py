@@ -8,6 +8,7 @@ print(result,result2)
 
 internt_status = ["highSpeed", "Low Speed", "medium speed", "ultra high", "suspended", "blocked"]
 TruthTable = [1,1,0,1,0,1]
+
 for batch in batched(internt_status,2):
     print(batch)
 

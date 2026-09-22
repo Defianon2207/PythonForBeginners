@@ -30,3 +30,5 @@ Data = ["ABCD", "DEFGH", "JKLMN"]
 for x in chain(internt_status, Data):
     print(x)
 
+combinations_result = list(combinations(internt_status,2))
+print("Total Combination",len(combinations_result))
