@@ -105,3 +105,10 @@ def add(a,b):
 sumed = list(starmap(add,li))
 
 #Permutation repeat
+
+take_data = takewhile(lambda x: x<5, [1,4,6,3,8])
+
+print(list(take_data))
+
+a,b,c=tee(internt_status,3)
+print(list(a),list(b),list(c), sep="\n")
