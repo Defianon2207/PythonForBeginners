@@ -9,3 +9,14 @@ for i in range(9):
     number.append(i)
 
 print(list(accumulate(number)))
+
+#Workiing with batched data
+
+unbatched = ["Rahul", "Namit", "Rachit", "Sachit", 
+"Neymar", "Messi","Ritesh","Rakesh", "NONONO"]
+
+batched_data = list(batched(unbatched,2,strict = False)) # False is a important parameter in the python
+print(batched_data )
+
+for k in batched_data:
+    print("Batch re Batch ",k)
