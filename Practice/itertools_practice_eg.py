@@ -32,3 +32,13 @@ for x in chain(internt_status, Data):
 
 combinations_result = list(combinations(internt_status,2))
 print("Total Combination",len(combinations_result))
+
+#Example of Yield
+def numbers_yield():
+    for i in range(10):
+        yield i
+
+counter = numbers_yield()
+for i in range(10):
+    print(next(counter))
+
