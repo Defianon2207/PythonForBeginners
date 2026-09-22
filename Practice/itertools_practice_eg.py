@@ -47,3 +47,9 @@ for i in range(10):
 
 result = list(combinations_with_replacement(internt_status,2))
 print(len(result), result, sep ="\n",end="\n")
+
+#Example of compress 
+data =["A","B","C","D","E","F","G","G","H","L","F","T"]
+datum=[1,1,1,1,1,1,1,0,1,1,1,0]
+
+print(list(compress(data,datum)))
