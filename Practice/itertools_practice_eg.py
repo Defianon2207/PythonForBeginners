@@ -53,3 +53,55 @@ data =["A","B","C","D","E","F","G","G","H","L","F","T"]
 datum=[1,1,1,1,1,1,1,0,1,1,1,0]
 
 print(list(compress(data,datum)))
+
+c = cycle(internt_status)
+
+
+for _ in range(1,10):
+    print(next(c))
+
+
+
+#Example of filter false
+
+filtered_data = filterfalse(lambda x : x == "Low Speed", internt_status)
+print(list(filtered_data))
+
+#Filtered Data -- No Delta
+
+#dropwhille example
+dropped_list = dropwhile(lambda x : x != "suspended", internt_status)
+print("dropList",list(dropped_list))
+
+#Group by example 
+
+students = [
+    ("A", "Rahul"),
+    ("A", "Aman"),
+    ("B", "Rohit"),
+    ("B", "Ajay"),
+    ("C","Kedia")
+]
+
+for grade, group in groupby(students, key=lambda x: x[0]):
+    print(grade, list(group))
+
+for _ in pairwise(internt_status):
+    print("pairwise")
+    print(_)
+
+
+# While starmap
+li =[(2, 5), (3, 2), (4, 3)]
+
+new_li = list(starmap(pow, li))
+print(new_li)
+
+#Star map example
+
+def add(a,b):
+    return a+b
+
+sumed = list(starmap(add,li))
+
+#Permutation repeat
