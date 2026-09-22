@@ -16,7 +16,7 @@ unbatched = ["Rahul", "Namit", "Rachit", "Sachit",
 "Neymar", "Messi","Ritesh","Rakesh", "NONONO"]
 
 batched_data = list(batched(unbatched,2,strict = False)) # False is a important parameter in the python
-print(batched_data )
+print(batched_data)
 
 for k in batched_data:
     print("Batch re Batch ",k)
@@ -26,14 +26,15 @@ for k in batched_data:
 internt_status = ["highSpeed", "Low Speed", "medium speed", "ultra high", "suspended", "blocked"]
 Data = ["ABCD", "DEFGH", "JKLMN"]
 
-
 for x in chain(internt_status, Data):
     print(x)
 
+#Example of combination
 combinations_result = list(combinations(internt_status,2))
 print("Total Combination",len(combinations_result))
 
 #Example of Yield
+#Yield holds the value in the 
 def numbers_yield():
     for i in range(10):
         yield i
@@ -42,3 +43,7 @@ counter = numbers_yield()
 for i in range(10):
     print(next(counter))
 
+#Example of combination_with_replacement
+
+result = list(combinations_with_replacement(internt_status,2))
+print(len(result), result, sep ="\n",end="\n")
