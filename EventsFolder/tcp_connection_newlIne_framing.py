@@ -66,3 +66,24 @@ async def main():
 
 
 asyncio.run(main())
+
+#For TLS encrypted connection
+
+# import asyncio
+# import ssl
+
+
+# async def main():
+#     loop = asyncio.get_running_loop()
+#     ssl_context = ssl.create_default_context()
+
+#     transport, protocol = await loop.create_connection(
+#         MyProtocol,
+#         host="example.com",
+#         port=443,
+#         ssl=ssl_context,
+#         server_hostname="example.com",
+#     )
+
+
+# asyncio.run(main())
