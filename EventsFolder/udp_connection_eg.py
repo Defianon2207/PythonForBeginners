@@ -6,7 +6,7 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
         self.transport = transport
 
         address = transport.get_extra_info("sockname")
-        print("UDP server running on:", address)
+        print("UDP server running on:", address,type(self.transport),"Above this", sep ="\n")
 
     def datagram_received(self, data, address):
         message = data.decode()
@@ -58,8 +58,9 @@ class UDPClientProtocol(asyncio.DatagramProtocol):
 
 
 async def main():
-    loop = asyncio.get_running_loop()
 
+    loop = asyncio.get_running_loop()
+    print(loop,"The name of the loop")
     # Create the UDP server.
     server_transport, server_protocol = (
         await loop.create_datagram_endpoint(
