@@ -6,7 +6,9 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
         self.transport = transport
 
         address = transport.get_extra_info("sockname")
-        print("UDP server running on:", address,type(self.transport),"Above this", sep ="\n")
+        print("UDP server running on:", address,type(self.transport),
+        transport._sock, transport._sock_fd,
+        "Above this", sep ="\n")
 
     def datagram_received(self, data, address):
         message = data.decode()
@@ -103,3 +105,39 @@ async def main():
 
 
 asyncio.run(main())
+
+
+#Example to provide existing UDP socket
+
+import asyncio
+import socket
+
+
+class MyProtocol(asyncio.DatagramProtocol):
+    def datagram_received(self, data, address):
+        print(data, address)
+
+
+# async def main():
+#     raw_socket = socket.socket(
+#         socket.AF_INET,
+#         socket.SOCK_DGRAM,
+#     )
+
+#     raw_socket.bind(("127.0.0.1", 8000))
+#     raw_socket.setblocking(False)
+
+#     loop = asyncio.get_running_loop()
+
+#     transport, protocol = await loop.create_datagram_endpoint(
+#         MyProtocol,
+#         sock=raw_socket,
+#     )
+
+#     try:
+#         await asyncio.sleep(60)
+#     finally:
+#         transport.close()
+
+
+# asyncio.run(main())
