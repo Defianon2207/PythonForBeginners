@@ -102,4 +102,18 @@ async def main():
     await server.wait_closed()
 
 
-asyncio.run(main())
+# asyncio.run(main())
+
+# Client connects
+#       ↓
+# connection_made(transport)
+#       ↓
+# create_task(self.send_file())
+#       ↓
+# send_file() opens the file
+#       ↓
+# await loop.sendfile(transport, file)
+#       ↓
+# File bytes travel through TCP
+#       ↓
+# Transport closes
