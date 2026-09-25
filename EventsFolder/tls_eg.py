@@ -221,3 +221,15 @@ asyncio.run(main())
 # Server received: Hello through TLS
 # Client received: Secure echo: Hello through TLS
 # Final response: Secure echo: Hello through TLS
+
+# start_tls() versus creating TLS immediately
+
+# If encryption is required from the beginning, use the ssl argument of create_connection():
+
+# transport, protocol = await loop.create_connection(
+#     protocol_factory,
+#     host="example.com",
+#     port=443,
+#     ssl=ssl.create_default_context(),
+#     server_hostname="example.com",
+# )
