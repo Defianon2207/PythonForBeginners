@@ -207,3 +207,17 @@ async def main():
 
 
 asyncio.run(main())
+
+# Server running on 127.0.0.1:51234
+# Server: client connected: ('127.0.0.1', 51235)
+# Client: plaintext connection established
+# Client received: Welcome. Send STARTTLS to enable encryption.
+# Client: requesting TLS
+# Server received: STARTTLS
+# Client received: READY
+# Client: beginning TLS handshake
+# Client: TLS enabled
+# Server: TLS enabled
+# Server received: Hello through TLS
+# Client received: Secure echo: Hello through TLS
+# Final response: Secure echo: Hello through TLS
