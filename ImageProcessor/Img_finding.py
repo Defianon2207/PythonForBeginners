@@ -8,3 +8,7 @@ k = cv.waitKey(0)
 if k == ord("s"):
     print("k")
     cv.imwrite("hello.jpg", img)
+
+pt =(10,0)
+
+
