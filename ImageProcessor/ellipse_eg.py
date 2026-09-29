@@ -2,7 +2,7 @@ import cv2
 
 img = cv2.imread("Mfks.png")
 
-center = (100, 80)
+center = (150, 50)
 axes = (70, 40)
 
 img = cv2.ellipse(img, center, axes, 0, 0, 360, (255, 0, 0), -1)

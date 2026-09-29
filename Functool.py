@@ -29,8 +29,3 @@ def power(base, exponent):
 square = partial(power, exponent =2)
 print(square(5))
 
-@lru_cache
-def count_vowels(sentence):
-    return sum(sentence.count(vowel) for vowel in 'AEIOUaeiou')
-
-print(count_vowels("sfjewurhndjhhdhd"))
