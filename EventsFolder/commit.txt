@@ -1,0 +1,12 @@
+import cv2
+
+img = cv2.imread("logo.png")
+
+center = (150, 120)
+axes = (90, 50)
+
+img = cv2.ellipse(img, center, axes, 45, 0, 360, (0, 255, 0), 4)
+
+cv2.imshow("Ellipse 2", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
