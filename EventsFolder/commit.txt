@@ -10,3 +10,7 @@ img = cv2.ellipse(img, center, axes, 45, 0, 360, (0, 255, 0), 4)
 cv2.imshow("Ellipse 2", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+?
+//
+///////
